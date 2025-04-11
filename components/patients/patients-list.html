@@ -1,0 +1,84 @@
+<div class="page patients-list-page active">
+    <div class="page-header">
+        <div class="page-controls">
+            <button class="back-btn dummy-btn"></button>
+            <button class="btn btn-outline dummy-btn">New</button>
+            <button class="btn btn-outline dummy-btn">Deactivate</button>
+            <button class="btn btn-outline dummy-btn">Edit</button>
+        </div>
+        <div class="page-search">
+            <input type="search" placeholder="Find Patient...">
+        </div>
+    </div>
+    
+    <div class="page-subheader">
+        <div class="dropdown view-list">
+            <button class="dropdown-toggle view-list-toggle dummy-btn">Active Patients</button>
+        </div>
+    </div>
+    
+    <div class="data-table">
+        <table>
+            <thead>
+                <tr>
+                    <th width="30"><input type="checkbox"></th>
+                    <th>Full Name</th>
+                    <th>Birthday</th>
+                    <th>Insurance Company</th>
+                    <th>Address</th>
+                    <th>Legal Guardian</th>
+                    <th width="30"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="patient-row" data-id="1">
+                    <td><input type="checkbox"></td>
+                    <td>Jana Nováková</td>
+                    <td>17. 08. 2012</td>
+                    <td>VZP (211)</td>
+                    <td>Květnová 34, 110 00, Praha</td>
+                    <td>Petr Novák (otec)</td>
+                    <td><button class="edit-row-btn dummy-btn"></button></td>
+                </tr>
+                <tr class="patient-row" data-id="2">
+                    <td><input type="checkbox"></td>
+                    <td>Jakub Dvořák</td>
+                    <td>05. 02. 2015</td>
+                    <td>VZP (211)</td>
+                    <td>Hlavní 12, 252 67, Kladno</td>
+                    <td>Martina Dvořáková (matka)</td>
+                    <td><button class="edit-row-btn dummy-btn"></button></td>
+                </tr>
+                <tr class="patient-row" data-id="3">
+                    <td><input type="checkbox"></td>
+                    <td>Eliška Černá</td>
+                    <td>22. 10. 2013</td>
+                    <td>ČPZP (205)</td>
+                    <td>Jablonského 67, 779 00, Olomouc</td>
+                    <td>Pavel Černý (otec)</td>
+                    <td><button class="edit-row-btn dummy-btn"></button></td>
+                </tr>
+                <tr class="patient-row" data-id="4">
+                    <td><input type="checkbox"></td>
+                    <td>Matěj Kovář</td>
+                    <td>12. 05. 2024</td>
+                    <td>VZP (211)</td>
+                    <td>Příční 24, 621 00, Brno</td>
+                    <td>Kateřina Malá (matka)</td>
+                    <td><button class="edit-row-btn dummy-btn"></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="table-footer">
+        <div class="records-info">Patients: 186 | Selected: 0</div>
+        <div class="pagination">
+            <button class="pagination-btn first-page-btn dummy-btn"></button>
+            <button class="pagination-btn prev-page-btn dummy-btn"></button>
+            <span class="pagination-info">Page: 1 / 8</span>
+            <button class="pagination-btn next-page-btn dummy-btn"></button>
+            <button class="pagination-btn last-page-btn dummy-btn"></button>
+        </div>
+    </div>
+</div>

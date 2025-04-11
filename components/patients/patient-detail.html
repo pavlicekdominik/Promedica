@@ -1,0 +1,184 @@
+<div class="page patient-detail-page active">
+    <div class="page-header">
+        <div class="page-controls">
+            <button class="back-btn" id="back-to-patients"></button>
+            <button class="btn btn-outline dummy-btn">Save</button>
+            <button class="btn btn-outline dummy-btn">Deactivate</button>
+            <button class="btn btn-outline dummy-btn">Validate</button>
+            <button class="btn btn-outline dummy-btn">New eReceipt</button>
+            <button class="btn btn-outline dummy-btn">New Referral</button>
+        </div>
+    </div>
+    
+    <div class="patient-header">
+        <div class="patient-avatar female"></div>
+        <div class="patient-basic-info">
+            <h2 class="patient-name">Jana Nováková</h2>
+            <p class="patient-age">12 years</p>
+        </div>
+    </div>
+    
+    <nav class="patient-tabs">
+        <ul>
+            <li class="active"><a href="#">Summary</a></li>
+            <li><a href="#">Vaccinations</a></li>
+            <li><a href="#">eReceipts</a></li>
+            <li><a href="#">Visits</a></li>
+            <li><a href="#">Referrals</a></li>
+            <li><a href="#">Allergies</a></li>
+            <li><a href="#">History</a></li>
+            <li><a href="#">Drug Intolerance</a></li>
+            <li><a href="#">Notes</a></li>
+            <li><a href="#">Whatsapp</a></li>
+        </ul>
+    </nav>
+    
+    <div class="patient-content">
+        <div class="patient-details-columns">
+            <div class="patient-column">
+                <div class="info-panel">
+                    <h3 class="panel-title">Base Information</h3>
+                    <div class="form-layout">
+                        <div class="form-group">
+                            <label>Insurance Company <span class="required">*</span></label>
+                            <div class="dropdown">
+                                <button class="dropdown-toggle dummy-btn">VZP (211)</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Insurance Number <span class="required">*</span></label>
+                            <input type="text" value="52464684454" required>
+                        </div>
+                        <div class="form-group">
+                            <label>First name <span class="required">*</span></label>
+                            <input type="text" value="Jana">
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name <span class="required">*</span></label>
+                            <input type="text" value="Nováková">
+                        </div>
+                        <div class="form-group">
+                            <label>Gender <span class="required">*</span></label>
+                            <div class="dropdown">
+                                <button class="dropdown-toggle dummy-btn">Female</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Birth Number <span class="required">*</span></label>
+                            <input type="text" value="1258174687">
+                        </div>
+                        <div class="form-group">
+                            <label>Legal Guardian <span class="required">*</span></label>
+                            <input type="text" value="Petr Novák (otec)">
+                        </div>
+                        <div class="form-group">
+                            <label>Address <span class="required">*</span></label>
+                            <input type="text" value="Květnová 34, 110 00, Praha">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="patient-column">
+                <div class="info-panel">
+                    <h3 class="panel-title">Medical Information</h3>
+                    <div class="form-layout">
+                        <div class="form-group">
+                            <label>Bloodtype</label>
+                            <div class="dropdown">
+                                <button class="dropdown-toggle dummy-btn">A</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Weight</label>
+                            <input type="text" value="37 kg">
+                        </div>
+                        <div class="form-group">
+                            <label>Height</label>
+                            <input type="text" value="132 cm">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-panel">
+                    <h3 class="panel-title">Allergies</h3>
+                    <div class="panel-header-actions">
+                        <a href="#" class="view-all-link">View all</a>
+                    </div>
+                    <div class="tags-container">
+                        <span class="tag">Pollen <button class="tag-remove dummy-btn"></button></span>
+                        <span class="tag">Lactose <button class="tag-remove dummy-btn"></button></span>
+                        <span class="tag">Dust Mite <button class="tag-remove dummy-btn"></button></span>
+                        <span class="tag">Insect sting <button class="tag-remove dummy-btn"></button></span>
+                    </div>
+                    <button class="btn-add-tag dummy-btn"></button>
+                </div>
+                
+                <div class="info-panel">
+                    <h3 class="panel-title">Vaccines</h3>
+                    <div class="panel-header-actions">
+                        <a href="#" class="view-all-link">View all</a>
+                    </div>
+                    <div class="vaccine-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Date Applied</th>
+                                    <th>Valid To</th>
+                                    <th>Manufacturer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>COVID-19</td>
+                                    <td>05.01.2023</td>
+                                    <td>04.01.2024</td>
+                                    <td>Pfizer</td>
+                                </tr>
+                                <tr>
+                                    <td>Hepatitis B</td>
+                                    <td>25.11.2022</td>
+                                    <td>11.08.2035</td>
+                                    <td>Moderna</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="patient-column">
+                <div class="info-panel">
+                    <h3 class="panel-title">Recent Timeline</h3>
+                    <div class="panel-header-actions">
+                        <a href="#" class="view-all-link">View all</a>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">21.01.2024 11:34</div>
+                            <div class="timeline-icon ereceipt-icon"></div>
+                            <div class="timeline-content">
+                                <h4>eReceipt</h4>
+                                <ul>
+                                    <li>Léčivý přípravek: Paralen 500 mg</li>
+                                    <li>Dávkování: 1 tableta každých 6 hodin</li>
+                                </ul>
+                            </div>
+                            <a href="#" class="view-details-link">View details</a>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">21.01.2024 11:26</div>
+                            <div class="timeline-icon visit-icon"></div>
+                            <div class="timeline-content">
+                                <h4>Visit</h4>
+                                <ul>
+                                    <li>Účel návštěvy: Kontrola po antibiotikách, zhoršení kašle</li>
+                                </ul>
+                            </div>
+                            <a href="#" class="view-details-link">View details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

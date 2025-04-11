@@ -3,43 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical App - Login</title>
+    <title>Medical App</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="login-page">
-    <div class="login-container">
-        <div class="login-box">
-            <div class="logo">
-                <span class="logo-text">MC</span>
+<body>
+    <div id="app-container">
+        <div id="auth-container" class="active">
+            <!-- Login component will be loaded here -->
+        </div>
+        
+        <div id="main-container" class="app-layout">
+            <div id="sidebar-container">
+                <!-- Sidebar component will be loaded here -->
             </div>
-            <h1>Welcome back</h1>
-            <p>Please enter your details to sign in</p>
             
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="email">Email address<span class="required">*</span></label>
-                    <input type="email" id="email" placeholder="Enter your email" required>
+            <div id="content-container" class="main-content">
+                <div id="toolbar-container">
+                    <!-- Toolbar component will be loaded here -->
                 </div>
                 
-                <div class="form-group">
-                    <label for="password">Password<span class="required">*</span></label>
-                    <input type="password" id="password" placeholder="••••••" required>
-                    <div class="password-toggle"></div>
+                <div id="page-container" class="page-content">
+                    <!-- Page components will be loaded here -->
                 </div>
-                
-                <div class="form-options">
-                    <div class="checkbox-container">
-                        <input type="checkbox" id="remember-me">
-                        <label for="remember-me">Remember me</label>
-                    </div>
-                    <a href="#" class="forgot-link">Forgot password?</a>
-                </div>
-                
-                <button type="submit" class="btn btn-primary btn-full">Sign In</button>
-            </form>
+            </div>
+        </div>
+        
+        <div id="modal-overlay"></div>
+        <div id="modals-container">
+            <!-- Modal components will be loaded here -->
         </div>
     </div>
 
-    <script src="js/script.js"></script>
+    <script src="js/component-loader.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>

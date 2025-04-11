@@ -1,0 +1,100 @@
+<div class="page calendar-page active">
+    <div class="page-header">
+        <div class="page-controls">
+            <button class="back-btn dummy-btn"></button>
+            <button class="btn btn-outline dummy-btn">New</button>
+            <button class="btn btn-outline dummy-btn">Cancel</button>
+            <button class="btn btn-outline dummy-btn">Edit</button>
+            <button class="btn btn-outline dummy-btn">Confirm</button>
+            <button class="btn btn-outline dummy-btn">Reject</button>
+        </div>
+    </div>
+    
+    <div class="calendar-grid">
+        <div class="time-column">
+            <div class="time-slot">07:00</div>
+            <div class="time-slot">08:00</div>
+            <div class="time-slot">09:00</div>
+            <div class="time-slot">10:00</div>
+            <div class="time-slot">11:00</div>
+            <div class="time-slot">12:00</div>
+            <div class="time-slot">13:00</div>
+        </div>
+        <div class="appointments-column">
+            <div class="appointment" style="top: 0; height: 60px;">
+                <div class="appointment-time">07:00 - 07:30</div>
+                <div class="appointment-title">Visit: Karel Havlíček</div>
+            </div>
+            <div class="appointment" style="top: 60px; height: 60px;">
+                <div class="appointment-time">08:00 - 08:30</div>
+                <div class="appointment-title">Visit: Jolana Bílá</div>
+            </div>
+            <div class="appointment notification" style="top: 30px; left: 250px; height: 60px;">
+                <div class="appointment-time">07:15 - 07:45</div>
+                <div class="appointment-title">Notification: Příjem vakcín</div>
+            </div>
+            <div class="appointment active" style="top: 180px; height: 60px;">
+                <div class="appointment-time">09:45 - 10:15</div>
+                <div class="appointment-title">Visit: Jan Hlavinka</div>
+            </div>
+            <div class="appointment confirmed" style="top: 140px; left: 250px; height: 40px;">
+                <div class="appointment-time">08:30 - 09:00</div>
+                <div class="appointment-title">Visit Booking: Filip Kundera</div>
+                <div class="appointment-source">Source: Web</div>
+            </div>
+            <div class="appointment confirmed" style="top: 240px; left: 250px; height: 60px;">
+                <div class="appointment-time">11:00 - 11:30</div>
+                <div class="appointment-title">Visit Booking: Martina Veselá</div>
+                <div class="appointment-source">Source: Web</div>
+            </div>
+            <div class="appointment blocker" style="top: 300px; height: 60px;">
+                <div class="appointment-time">12:00 - 13:00</div>
+                <div class="appointment-title">Blocker: Oběd</div>
+            </div>
+        </div>
+        <div class="appointment-detail">
+            <div class="detail-header">
+                <h3>Visit</h3>
+                <button class="close-detail-btn">×</button>
+            </div>
+            <div class="detail-content">
+                <div class="detail-row">
+                    <div class="detail-label">From:</div>
+                    <div class="detail-value">09:30</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">To:</div>
+                    <div class="detail-value">10:30</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Notification:</div>
+                    <div class="detail-value">15 minutes ahead</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Confirmed:</div>
+                    <div class="detail-value confirmed">✓</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Patient:</div>
+                    <div class="detail-value">
+                        <a href="#">Jan Hlavinka</a>
+                        <div>1806169145</div>
+                        <div>VZP (211)</div>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Reason:</div>
+                    <div class="detail-value">Preventive Check-Up</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Last Visit:</div>
+                    <div class="detail-value">
+                        <a href="#">03.11.2024</a>
+                        <div>08:30 - 9:30</div>
+                        <div>Preventive Check-Up</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
