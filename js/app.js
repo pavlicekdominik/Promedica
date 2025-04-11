@@ -22,7 +22,33 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
+    // Component lifecycle handlers
+    const componentLifecycle = {
+        // Map to store component-specific cleanup functions
+        _cleanupHandlers: new Map(),
+        
+        // Register a cleanup handler for a specific container
+        registerCleanup(containerId, cleanupFn) {
+            this._cleanupHandlers.set(containerId, cleanupFn);
+        },
+        
+        // Called before a component is unloaded
+        onBeforeUnload(containerId) {
+            const cleanupFn = this._cleanupHandlers.get(containerId);
+            if (cleanupFn && typeof cleanupFn === 'function') {
+                try {
+                    cleanupFn();
+                } catch (error) {
+                    console.error(`Error in cleanup for ${containerId}:`, error);
+                }
+                this._cleanupHandlers.delete(containerId);
+            }
+        }
+    };
+    
     const App = {
+        componentLifecycle,
+        
         async init() {
             await this.setupInitialView();
             this.bindGlobalEvents();
@@ -61,6 +87,10 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         
         async loadPage(pageName) {
+            // First unload the current page
+            this.unloadCurrentPage();
+            
+            // Update app state
             AppState.setCurrentPage(pageName);
             let pagePath;
             
@@ -78,8 +108,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     pagePath = 'components/patients/patients-list.html';
             }
             
+            // Load the new page component
             await ComponentLoader.loadComponent('page-container', pagePath);
             
+            // Bind page-specific events
             switch(pageName) {
                 case 'patients-list':
                     this.bindPatientsListEvents();
@@ -89,6 +121,34 @@ document.addEventListener('DOMContentLoaded', function() {
                     break;
                 case 'calendar':
                     this.bindCalendarEvents();
+                    break;
+            }
+        },
+        
+        unloadCurrentPage() {
+            const currentPage = AppState.currentPage;
+            console.log(`Unloading current page: ${currentPage}`);
+            
+            // Register cleanup for the specific page if needed
+            switch(currentPage) {
+                case 'patients-list':
+                    // Example cleanup - remove any polling intervals
+                    this.componentLifecycle.registerCleanup('page-container', () => {
+                        console.log('Cleaning up patients list page');
+                        // Clear any timers, abort any fetches, etc.
+                    });
+                    break;
+                case 'patient-detail':
+                    this.componentLifecycle.registerCleanup('page-container', () => {
+                        console.log('Cleaning up patient detail page');
+                        // Save draft form data or other cleanup
+                    });
+                    break;
+                case 'calendar':
+                    this.componentLifecycle.registerCleanup('page-container', () => {
+                        console.log('Cleaning up calendar page');
+                        // Clear any calendar-specific timers
+                    });
                     break;
             }
         },
@@ -132,204 +192,310 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         
         bindAuthEvents() {
+            const containerId = 'auth-container';
             const loginForm = document.getElementById('login-form');
+            
             if (loginForm) {
-                loginForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const email = document.getElementById('email').value;
-                    const password = document.getElementById('password').value;
-                    
-                    if (email && password) {
-                        console.log('Login attempt with:', { email });
-                        window.dispatchEvent(new CustomEvent('app:login'));
-                    } else {
-                        console.log('Login validation failed: Missing required fields');
-                        alert('Please fill in all required fields');
+                ComponentLoader.registerEventListener(
+                    containerId,
+                    loginForm,
+                    'submit',
+                    function(e) {
+                        e.preventDefault();
+                        const email = document.getElementById('email').value;
+                        const password = document.getElementById('password').value;
+                        
+                        if (email && password) {
+                            console.log('Login attempt with:', { email });
+                            window.dispatchEvent(new CustomEvent('app:login'));
+                        } else {
+                            console.log('Login validation failed: Missing required fields');
+                            alert('Please fill in all required fields');
+                        }
                     }
-                });
+                );
             }
         },
         
         bindNavigationEvents() {
+            const containerId = 'sidebar-container';
             const navLinks = document.querySelectorAll('.nav-link');
+            
             if (navLinks) {
                 navLinks.forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        console.log('Navigation clicked:', this.textContent.trim());
-                        
-                        document.querySelectorAll('.nav-item').forEach(item => {
-                            item.classList.remove('active');
-                        });
-                        
-                        this.parentElement.classList.add('active');
-                        
-                        const targetPage = this.getAttribute('data-page');
-                        if (targetPage) {
-                            window.dispatchEvent(new CustomEvent('app:navigate', {
-                                detail: { page: targetPage }
-                            }));
+                    ComponentLoader.registerEventListener(
+                        containerId,
+                        link,
+                        'click',
+                        function(e) {
+                            e.preventDefault();
+                            console.log('Navigation clicked:', this.textContent.trim());
+                            
+                            document.querySelectorAll('.nav-item').forEach(item => {
+                                item.classList.remove('active');
+                            });
+                            
+                            this.parentElement.classList.add('active');
+                            
+                            const targetPage = this.getAttribute('data-page');
+                            if (targetPage) {
+                                window.dispatchEvent(new CustomEvent('app:navigate', {
+                                    detail: { page: targetPage }
+                                }));
+                            }
                         }
-                    });
+                    );
                 });
             }
         },
         
         bindToolbarEvents() {
+            const containerId = 'toolbar-container';
+            
             const userBtn = document.getElementById('open-user-modal');
             const settingsBtn = document.getElementById('open-settings-modal');
             const helpBtn = document.getElementById('open-help-modal');
             const newBtn = document.getElementById('open-new-menu');
             
             if (userBtn) {
-                userBtn.addEventListener('click', () => {
-                    window.dispatchEvent(new CustomEvent('app:openModal', {
-                        detail: { modalId: 'user-modal' }
-                    }));
-                });
+                ComponentLoader.registerEventListener(
+                    containerId,
+                    userBtn,
+                    'click',
+                    () => {
+                        window.dispatchEvent(new CustomEvent('app:openModal', {
+                            detail: { modalId: 'user-modal' }
+                        }));
+                    }
+                );
             }
             
             if (settingsBtn) {
-                settingsBtn.addEventListener('click', () => {
-                    window.dispatchEvent(new CustomEvent('app:openModal', {
-                        detail: { modalId: 'settings-modal' }
-                    }));
-                });
+                ComponentLoader.registerEventListener(
+                    containerId,
+                    settingsBtn,
+                    'click',
+                    () => {
+                        window.dispatchEvent(new CustomEvent('app:openModal', {
+                            detail: { modalId: 'settings-modal' }
+                        }));
+                    }
+                );
             }
             
             if (helpBtn) {
-                helpBtn.addEventListener('click', () => {
-                    window.dispatchEvent(new CustomEvent('app:openModal', {
-                        detail: { modalId: 'help-modal' }
-                    }));
-                });
+                ComponentLoader.registerEventListener(
+                    containerId,
+                    helpBtn,
+                    'click',
+                    () => {
+                        window.dispatchEvent(new CustomEvent('app:openModal', {
+                            detail: { modalId: 'help-modal' }
+                        }));
+                    }
+                );
             }
             
             if (newBtn) {
-                newBtn.addEventListener('click', () => {
-                    window.dispatchEvent(new CustomEvent('app:openModal', {
-                        detail: { modalId: 'new-menu-modal' }
-                    }));
-                });
+                ComponentLoader.registerEventListener(
+                    containerId,
+                    newBtn,
+                    'click',
+                    () => {
+                        window.dispatchEvent(new CustomEvent('app:openModal', {
+                            detail: { modalId: 'new-menu-modal' }
+                        }));
+                    }
+                );
             }
         },
         
         bindPatientsListEvents() {
+            const containerId = 'page-container';
             const patientRows = document.querySelectorAll('.patient-row');
+            
             if (patientRows) {
                 patientRows.forEach(row => {
-                    row.addEventListener('click', function(e) {
-                        if (!e.target.classList.contains('edit-row-btn') && 
-                            !e.target.closest('input[type="checkbox"]')) {
-                            const patientId = this.getAttribute('data-id');
-                            console.log('Patient clicked:', patientId);
-                            
-                            AppState.setActivePatient(patientId);
-                            
-                            window.dispatchEvent(new CustomEvent('app:navigate', {
-                                detail: { page: 'patient-detail' }
-                            }));
+                    // Using the registerEventListener method to track and clean up events
+                    ComponentLoader.registerEventListener(
+                        containerId,
+                        row,
+                        'click',
+                        function(e) {
+                            if (!e.target.classList.contains('edit-row-btn') && 
+                                !e.target.closest('input[type="checkbox"]')) {
+                                const patientId = this.getAttribute('data-id');
+                                console.log('Patient clicked:', patientId);
+                                
+                                AppState.setActivePatient(patientId);
+                                
+                                window.dispatchEvent(new CustomEvent('app:navigate', {
+                                    detail: { page: 'patient-detail' }
+                                }));
+                            }
                         }
-                    });
+                    );
                 });
             }
         },
         
         bindPatientDetailEvents() {
+            const containerId = 'page-container';
+            
             const backBtn = document.getElementById('back-to-patients');
             if (backBtn) {
-                backBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    console.log('Back to patients list');
-                    
-                    window.dispatchEvent(new CustomEvent('app:navigate', {
-                        detail: { page: 'patients-list' }
-                    }));
-                });
+                ComponentLoader.registerEventListener(
+                    containerId,
+                    backBtn,
+                    'click',
+                    function(e) {
+                        e.preventDefault();
+                        console.log('Back to patients list');
+                        
+                        window.dispatchEvent(new CustomEvent('app:navigate', {
+                            detail: { page: 'patients-list' }
+                        }));
+                    }
+                );
             }
             
             const patientTabs = document.querySelectorAll('.patient-tabs li a');
             patientTabs.forEach(tab => {
-                tab.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    document.querySelectorAll('.patient-tabs li').forEach(item => {
-                        item.classList.remove('active');
-                    });
-                    
-                    this.parentElement.classList.add('active');
-                    console.log('Patient tab clicked:', this.textContent.trim());
-                });
+                ComponentLoader.registerEventListener(
+                    containerId,
+                    tab,
+                    'click',
+                    function(e) {
+                        e.preventDefault();
+                        
+                        document.querySelectorAll('.patient-tabs li').forEach(item => {
+                            item.classList.remove('active');
+                        });
+                        
+                        this.parentElement.classList.add('active');
+                        console.log('Patient tab clicked:', this.textContent.trim());
+                        
+                        // Here you would typically load the tab-specific content component
+                        // const tabName = this.getAttribute('data-tab');
+                        // ComponentLoader.loadComponent('patient-tab-content', `components/patients/patient-tabs/${tabName}.html`);
+                    }
+                );
+            });
+            
+            // Register cleanup for any form values if needed
+            this.componentLifecycle.registerCleanup(containerId, () => {
+                // Save form state or perform other cleanup
+                console.log('Saving draft patient data before unloading');
+                // You could save form data to localStorage here
             });
         },
         
         bindCalendarEvents() {
+            const containerId = 'page-container';
+            
             const appointments = document.querySelectorAll('.appointment');
             if (appointments) {
                 appointments.forEach(appointment => {
-                    appointment.addEventListener('click', function() {
-                        console.log('Appointment clicked:', this.querySelector('.appointment-title').textContent);
-                        
-                        const detailPanel = document.querySelector('.appointment-detail');
-                        if (detailPanel) {
-                            detailPanel.style.display = detailPanel.style.display === 'block' ? 'none' : 'block';
+                    ComponentLoader.registerEventListener(
+                        containerId,
+                        appointment,
+                        'click',
+                        function() {
+                            console.log('Appointment clicked:', this.querySelector('.appointment-title').textContent);
+                            
+                            const detailPanel = document.querySelector('.appointment-detail');
+                            if (detailPanel) {
+                                detailPanel.style.display = detailPanel.style.display === 'block' ? 'none' : 'block';
+                            }
                         }
-                    });
+                    );
                 });
             }
             
             const closeDetailBtn = document.querySelector('.close-detail-btn');
             if (closeDetailBtn) {
-                closeDetailBtn.addEventListener('click', function() {
-                    const detailPanel = document.querySelector('.appointment-detail');
-                    if (detailPanel) {
-                        detailPanel.style.display = 'none';
+                ComponentLoader.registerEventListener(
+                    containerId,
+                    closeDetailBtn,
+                    'click',
+                    function() {
+                        const detailPanel = document.querySelector('.appointment-detail');
+                        if (detailPanel) {
+                            detailPanel.style.display = 'none';
+                        }
                     }
-                });
+                );
             }
         },
         
         bindModalEvents() {
+            const containerId = 'modals-container';
+            
             const modalOverlay = document.getElementById('modal-overlay');
             const closeButtons = document.querySelectorAll('.modal-close-btn');
             const logoutLink = document.querySelector('.modal-link');
             
             closeButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    window.dispatchEvent(new CustomEvent('app:closeModal'));
-                });
+                ComponentLoader.registerEventListener(
+                    containerId,
+                    button,
+                    'click',
+                    () => {
+                        window.dispatchEvent(new CustomEvent('app:closeModal'));
+                    }
+                );
             });
             
             if (modalOverlay) {
-                modalOverlay.addEventListener('click', () => {
-                    window.dispatchEvent(new CustomEvent('app:closeModal'));
-                });
+                ComponentLoader.registerEventListener(
+                    'modal-overlay',
+                    modalOverlay,
+                    'click',
+                    () => {
+                        window.dispatchEvent(new CustomEvent('app:closeModal'));
+                    }
+                );
             }
             
             if (logoutLink) {
-                logoutLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    console.log('Log out clicked');
-                    window.dispatchEvent(new CustomEvent('app:logout'));
-                });
+                ComponentLoader.registerEventListener(
+                    containerId,
+                    logoutLink,
+                    'click',
+                    function(e) {
+                        e.preventDefault();
+                        console.log('Log out clicked');
+                        window.dispatchEvent(new CustomEvent('app:logout'));
+                    }
+                );
             }
             
             const modals = document.querySelectorAll('.modal');
             modals.forEach(modal => {
-                modal.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                });
+                ComponentLoader.registerEventListener(
+                    containerId,
+                    modal,
+                    'click',
+                    function(e) {
+                        e.stopPropagation();
+                    }
+                );
             });
             
             const menuOptions = document.querySelectorAll('.settings-item, .help-option, .new-menu-option');
             menuOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    const label = this.querySelector('.settings-label, .help-label, .new-menu-label');
-                    if (label) {
-                        console.log('Menu option clicked:', label.textContent);
-                        window.dispatchEvent(new CustomEvent('app:closeModal'));
+                ComponentLoader.registerEventListener(
+                    containerId,
+                    option,
+                    'click',
+                    function() {
+                        const label = this.querySelector('.settings-label, .help-label, .new-menu-label');
+                        if (label) {
+                            console.log('Menu option clicked:', label.textContent);
+                            window.dispatchEvent(new CustomEvent('app:closeModal'));
+                        }
                     }
-                });
+                );
             });
         },
         
@@ -359,5 +525,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
+    // Make App globally available for component-loader to access lifecycle methods
+    window.App = App;
+    
+    // Initialize the application
     App.init();
 });
