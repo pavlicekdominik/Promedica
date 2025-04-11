@@ -46,7 +46,12 @@ const ModalModule = {
                 (e) => {
                     e.preventDefault();
                     console.log('Log out clicked');
-                    window.location.href = 'index.html';
+                    
+                    // Clear authentication token
+                    localStorage.removeItem('auth_token');
+                    
+                    // Redirect to login page
+                    window.location.replace('index.html');
                 }
             );
         }
