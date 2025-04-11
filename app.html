@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical App - Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-layout">
+        <div id="sidebar-container">
+            <!-- Sidebar component will be loaded here -->
+        </div>
+        
+        <div class="main-content">
+            <div id="toolbar-container">
+                <!-- Toolbar component will be loaded here -->
+            </div>
+            
+            <div id="page-container" class="page-content">
+                <!-- Page components will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-overlay"></div>
+    <div id="modals-container">
+        <!-- Modal components will be loaded here -->
+    </div>
+
+    <!-- Core libraries -->
+    <script src="js/component-loader.js"></script>
+    
+    <!-- Module files -->
+    <script src="js/shared/modal.js"></script>
+    <script src="js/layout/sidebar.js"></script>
+    <script src="js/layout/toolbar.js"></script>
+    <script src="js/patients/patients-list.js"></script>
+    <script src="js/patients/patient-detail.js"></script>
+    <script src="js/visits/calendar.js"></script>
+    
+    <!-- Main application -->
+    <script src="js/app.js"></script>
+</body>
+</html>

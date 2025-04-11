@@ -218,6 +218,10 @@ textarea:focus {
     padding: 0.75rem;
 }
 
+tr:first-child {
+    clip-path: inset(0 0 0 0 round var(--border-radius) var(--border-radius) 0 0);
+}
+
 /* Main App Layout */
 .app-layout {
     display: flex;
@@ -456,10 +460,9 @@ textarea:focus {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 1rem;
-    padding-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    /* padding-top: 0.5rem; */
 }
-
 
 .page-header {
     display: flex;
@@ -761,6 +764,10 @@ th {
     justify-content: space-between;
 }
 
+.panel-title h3 {
+    font-size: 1rem;
+}
+
 .view-all-link {
     font-size: 0.75rem;
     font-weight: normal;
@@ -781,6 +788,10 @@ th {
 
 .form-layout {
     padding: 1rem;
+}
+
+.panel-header {
+    display: flex;
 }
 
 .tags-container {
@@ -1179,7 +1190,7 @@ th {
 
 #auth-container, 
 #main-container {
-    display: none;
+    display: block;
     width: 100%;
     height: 100%;
 }
@@ -1194,7 +1205,7 @@ th {
 }
 
 #sidebar-container {
-    height: 100%;
+    background: transparent;
 }
 
 #content-container {

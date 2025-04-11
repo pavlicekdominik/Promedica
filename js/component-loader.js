@@ -45,9 +45,10 @@ const ComponentLoader = {
         // Get the active component info
         const component = this._activeComponents.get(containerId);
         if (component) {
-            // Trigger any onBeforeUnload callbacks
-            if (window.App && window.App.componentLifecycle) {
-                window.App.componentLifecycle.onBeforeUnload(containerId);
+            // Find the module responsible for this component
+            const moduleId = this._getModuleIdForContainer(containerId);
+            if (moduleId && window[moduleId] && typeof window[moduleId].cleanup === 'function') {
+                window[moduleId].cleanup();
             }
             
             // Clean up registered event listeners
@@ -62,6 +63,32 @@ const ComponentLoader = {
         // Clear the container
         container.innerHTML = '';
         return true;
+    },
+    
+    _getModuleIdForContainer(containerId) {
+        // Map container IDs to their module global variables
+        const moduleMap = {
+            'auth-container': 'AuthModule',
+            'sidebar-container': 'SidebarModule',
+            'toolbar-container': 'ToolbarModule',
+            'page-container': this._getPageModuleId(),
+            'modals-container': 'ModalModule'
+        };
+        
+        return moduleMap[containerId] || null;
+    },
+    
+    _getPageModuleId() {
+        // Determine which page module is active based on URL or state
+        const currentPage = window.location.hash.substring(1) || 'patients-list';
+        
+        const pageModuleMap = {
+            'patients-list': 'PatientsListModule',
+            'patient-detail': 'PatientDetailModule',
+            'calendar': 'CalendarModule'
+        };
+        
+        return pageModuleMap[currentPage] || 'PatientsListModule';
     },
     
     unloadAllComponents() {
