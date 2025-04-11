@@ -514,6 +514,7 @@ textarea:focus {
     border: solid var(--text-light);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
+    margin-left: 10px;
 }
 
 /* Data Table */
@@ -710,7 +711,7 @@ th {
     box-shadow: var(--shadow);
     margin-bottom: 1rem;
     overflow: hidden;
-    height: 100%;
+    /* height: 100%; */
 }
 
 .panel-title {
