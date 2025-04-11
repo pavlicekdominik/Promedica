@@ -518,6 +518,7 @@ textarea:focus {
 /* Data Table */
 .data-table {
     width: 100%;
+    height: 80%;
     overflow-x: auto;
     background-color: var(--bg-color);
     border-radius: var(--border-radius);
@@ -708,6 +709,7 @@ th {
     box-shadow: var(--shadow);
     margin-bottom: 1rem;
     overflow: hidden;
+    height: 100%;
 }
 
 .panel-title {
@@ -827,7 +829,7 @@ th {
 .timeline-icon {
     position: absolute;
     top: 0.5rem;
-    left: 1.5rem;
+    left: 1.2rem;
     width: 20px;
     height: 20px;
     border-radius: 50%;
