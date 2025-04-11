@@ -57,12 +57,22 @@ button {
 input[type="text"],
 input[type="email"],
 input[type="password"],
-input[type="search"],
 select,
 textarea {
     width: 100%;
     padding: 0.5rem 0.75rem;
     border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    font-size: 14px;
+}
+
+input[type="search"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 0px solid var(--border-color);
     border-radius: var(--border-radius);
     font-family: inherit;
     font-size: 14px;
