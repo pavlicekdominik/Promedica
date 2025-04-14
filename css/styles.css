@@ -108,13 +108,12 @@ textarea:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
     background-color: #1a1a1a;
 }
 
 .login-container {
     width: 100%;
-    max-width: 420px;
+    max-width: 500px;
     padding: 2rem;
 }
 
@@ -129,7 +128,6 @@ textarea:focus {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* margin-bottom: 1.5rem; */
 }
 
 .logo-text {
@@ -146,8 +144,26 @@ textarea:focus {
 
 .login-box p {
     color: var(--text-light);
+    font-size: var(--font-medium);
     margin-bottom: 1.5rem;
     text-align: center;
+}
+
+#login-form {
+    margin-top: 1rem;
+}
+
+.login-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.login-header-text {
+    position: relative;
+    top: -2rem;
 }
 
 .form-group {
@@ -351,6 +367,24 @@ tr:first-child {
 
 .referral-icon {
     background-image: url("/icons/referral-icon.svg");
+}
+
+.confirm-icon {
+    background-image: url("/icons/confirm-icon.svg");
+}
+
+.cancel-icon {
+    background-image: url("/icons/cancel-icon.svg");
+}
+
+.mc-icon {
+    background-image: url("/icons/mc.png");
+    width: 10rem;
+    height: 10rem;
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .home-icon {
@@ -1026,11 +1060,13 @@ th {
     background-color: #e6f7ff;
     border-left: 3px solid var(--primary-color);
     border-radius: 4px;
-    padding: 0.5rem;
+    padding: 0.15rem;
     font-size: var(--font-small);
     box-shadow: var(--shadow);
     cursor: pointer;
     transition: var(--transition);
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .appointment:hover {
@@ -1071,6 +1107,7 @@ th {
 
 .appointment-title {
     font-weight: 400;
+    text-overflow: clip;
 }
 
 .appointment-source {
