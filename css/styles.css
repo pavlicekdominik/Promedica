@@ -18,6 +18,9 @@
     --yellow: #ecc94b;
     --blue: #3182ce;
     --gray: #718096;
+
+    --female-tint: #E38F8F;
+
     --transition: all 0.2s ease;
 
     --ribbon-icon: 1.25rem;
@@ -772,7 +775,7 @@ th {
 }
 
 .patient-avatar.female {
-    background-color: var(--red);
+    background-color: var(--female-tint);
 }
 
 .patient-avatar.male {
@@ -790,7 +793,9 @@ th {
 }
 
 .patient-avatar.female::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='7'%3E%3C/circle%3E%3Cpolyline points='8.21 13.89 7 23 12 20 17 23 15.79 13.88'%3E%3C/polyline%3E%3C/svg%3E");
+    width: 36px;
+    height: 36px;
+    background-image: url("/icons/femaile-icon.svg");
 }
 
 .patient-avatar.male::before {
