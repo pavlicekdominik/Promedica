@@ -11,7 +11,6 @@ const ModalModule = {
         const closeButtons = document.querySelectorAll('.modal-close-btn');
         const logoutLink = document.querySelector('.modal-link');
         
-        // Close buttons in all modals
         if (closeButtons) {
             closeButtons.forEach(button => {
                 ComponentLoader.registerEventListener(
@@ -25,7 +24,6 @@ const ModalModule = {
             });
         }
         
-        // Modal overlay background click closes all modals
         if (modalOverlay) {
             ComponentLoader.registerEventListener(
                 'modal-overlay',
@@ -37,7 +35,6 @@ const ModalModule = {
             );
         }
         
-        // Logout link in user modal
         if (logoutLink) {
             ComponentLoader.registerEventListener(
                 this.containerId,
@@ -45,18 +42,12 @@ const ModalModule = {
                 'click',
                 (e) => {
                     e.preventDefault();
-                    console.log('Log out clicked');
-                    
-                    // Clear authentication token
                     localStorage.removeItem('auth_token');
-                    
-                    // Redirect to login page
                     window.location.replace('index.html');
                 }
             );
         }
         
-        // Stop propagation for clicks inside modals
         const modals = document.querySelectorAll('.modal');
         if (modals) {
             modals.forEach(modal => {
@@ -71,7 +62,6 @@ const ModalModule = {
             });
         }
         
-        // Menu options in all modals
         const menuOptions = document.querySelectorAll('.settings-item, .help-option, .new-menu-option');
         if (menuOptions) {
             menuOptions.forEach(option => {
@@ -82,45 +72,73 @@ const ModalModule = {
                     function() {
                         const label = this.querySelector('.settings-label, .help-label, .new-menu-label');
                         if (label) {
-                            console.log('Menu option clicked:', label.textContent);
                             ModalModule.closeModal();
                         }
                     }
                 );
             });
         }
+        
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.closeModal();
+            }
+        });
     },
     
     openModal(modalId) {
-        console.log('Opening modal:', modalId);
-        
-        // Hide all modals first
         document.querySelectorAll('.modal').forEach(modal => {
             modal.style.display = 'none';
+            modal.classList.remove('visible');
         });
         
-        // Show overlay and the requested modal
         const modalOverlay = document.getElementById('modal-overlay');
         const targetModal = document.getElementById(modalId);
         
-        if (modalOverlay) modalOverlay.style.display = 'block';
-        if (targetModal) targetModal.style.display = 'block';
+        if (modalOverlay) {
+            modalOverlay.style.display = 'block';
+            setTimeout(() => {
+                modalOverlay.classList.add('visible');
+            }, 10);
+        }
+        
+        if (targetModal) {
+            targetModal.style.display = 'block';
+            setTimeout(() => {
+                targetModal.classList.add('visible');
+            }, 10);
+        }
+        
+        document.body.classList.add('modal-open');
+        document.documentElement.classList.add('blur-background');
     },
     
     closeModal() {
-        console.log('Closing modals');
+        const activeModals = document.querySelectorAll('.modal[style*="display: block"]');
+        const modalOverlay = document.getElementById('modal-overlay');
         
-        // Hide all modals and the overlay
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.style.display = 'none';
+        if (modalOverlay) {
+            modalOverlay.classList.remove('visible');
+        }
+        
+        activeModals.forEach(modal => {
+            modal.classList.remove('visible');
         });
         
-        const modalOverlay = document.getElementById('modal-overlay');
-        if (modalOverlay) modalOverlay.style.display = 'none';
+        setTimeout(() => {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.style.display = 'none';
+            });
+            
+            if (modalOverlay) modalOverlay.style.display = 'none';
+            
+            document.body.classList.remove('modal-open');
+            document.documentElement.classList.remove('blur-background');
+        }, 300);
     },
     
     cleanup() {
-        console.log('Cleaning up Modal Module');
-        // Any specific modal cleanup
+        document.body.classList.remove('modal-open');
+        document.documentElement.classList.remove('blur-background');
     }
 };

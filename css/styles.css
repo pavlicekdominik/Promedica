@@ -19,13 +19,18 @@
     --blue: #3182ce;
     --gray: #718096;
     --transition: all 0.2s ease;
-    --ribbon-icon: 24px;
+
+    --ribbon-icon: 1.25rem;
 
     --font-very-small: 0.7rem;
     --font-small: 0.9rem;
     --font-medium: 1.1rem;
     --font-large: 1.25rem;
     --font-very-large: 1.5rem;
+
+    --sidebar-width: 15rem;
+    --toolbar-height: 3.5rem;
+    --page-header-height: 3.75rem;
 }
 
 html, body {
@@ -233,6 +238,8 @@ tr:first-child {
 .app-layout {
     display: flex;
     min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
 }
 
 /* Sidebar */
@@ -298,6 +305,7 @@ tr:first-child {
     opacity: 0.7;
 }
 
+.grid-button,
 .ribbon-button {
     display: flex;
     flex-direction: row;
@@ -307,6 +315,7 @@ tr:first-child {
     justify-content: space-around;
 }
 
+.grid-button-icon,
 .ribbon-button-icon {
     width: var(--ribbon-icon);
     height: var(--ribbon-icon);
@@ -314,6 +323,14 @@ tr:first-child {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.new-icon {
+    background-image: url("/icons/new-icon.svg");
+}
+
+.edit-icon {
+    background-image: url("/icons/edit-icon.svg");
 }
 
 .save-icon {
@@ -394,6 +411,7 @@ tr:first-child {
 
 /* Main Content */
 .main-content {
+    margin-left: var(--sidebar-width);
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -597,6 +615,12 @@ tr:first-child {
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
     margin-left: 10px;
+}
+
+.form-content {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100vh;
 }
 
 /* Data Table */
@@ -1105,125 +1129,6 @@ th {
     color: var(--green);
 }
 
-/* Modals */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 100;
-    display: none;
-}
-
-.modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: var(--bg-color);
-    border-radius: var(--border-radius);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    z-index: 101;
-    width: 90%;
-    max-width: 400px;
-    max-height: 90vh;
-    overflow-y: auto;
-    display: none;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.modal-close-btn {
-    font-size: var(--font-large);
-    color: var(--text-light);
-}
-
-.modal-content {
-    padding: 1rem;
-}
-
-.doctor-info {
-    font-size: var(--font-small);
-}
-
-.doctor-address {
-    margin-bottom: 1rem;
-}
-
-.doctor-name {
-    display: flex;
-    align-items: center;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-}
-
-.doctor-icon {
-    width: 20px;
-    height: 20px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'%3E%3C/path%3E%3Cpolyline points='9 22 9 12 15 12 15 22'%3E%3C/polyline%3E%3C/svg%3E");
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin-right: 0.5rem;
-}
-
-.doctor-contacts {
-    color: var(--text-light);
-}
-
-.role-label {
-    margin-right: 0.5rem;
-    font-weight: 500;
-}
-
-.settings-list,
-.help-options,
-.new-menu-group {
-    margin-bottom: 1.5rem;
-}
-
-.settings-item,
-.help-option,
-.new-menu-option {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--border-color);
-    cursor: pointer;
-}
-
-.settings-item:last-child,
-.help-option:last-child,
-.new-menu-option:last-child {
-    border-bottom: none;
-}
-
-.settings-icon,
-.help-icon,
-.new-menu-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 0.75rem;
-}
-
-.new-menu-group-header {
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    color: var(--text-light);
-}
-
-.modal-link {
-    color: var(--primary-color);
-    font-size: var(--font-small);
-}
 
 /* Additional styles for component architecture */
 
@@ -1251,6 +1156,13 @@ th {
 
 #sidebar-container {
     background: transparent;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 10;
 }
 
 #content-container {
@@ -1265,8 +1177,10 @@ th {
 }
 
 #page-container {
-    flex-grow: 1;
-    overflow-y: auto;
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .login-page {
