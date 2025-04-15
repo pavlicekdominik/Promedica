@@ -861,7 +861,7 @@ th {
 }
 
 .patient-avatar.male::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='5' r='3'%3E%3C/circle%3E%3Cline x1='12' y1='8' x2='12' y2='21'%3E%3C/line%3E%3Cpath d='M8 16h8'%3E%3C/path%3E%3Cpath d='M8 12h8'%3E%3C/path%3E%3C/svg%3E");
+    background-image: url("/icons/male-icon.svg");
 }
 
 .patient-name {
@@ -1320,38 +1320,5 @@ th {
     #auth-container, 
     #main-container {
         min-height: 600px;
-    }
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .app-layout {
-        flex-direction: column;
-    }
-    
-    .sidebar {
-        width: 100%;
-        height: auto;
-        overflow-x: auto;
-    }
-    
-    .nav-items {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-    }
-    
-    .patient-details-columns {
-        flex-direction: column;
-    }
-    
-    .calendar-grid {
-        flex-direction: column;
-        height: auto;
-    }
-    
-    .appointment-detail {
-        position: fixed;
-        width: 100%;
     }
 }

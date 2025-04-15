@@ -1,0 +1,213 @@
+/* Mobile Styles */
+@media (max-width: 768px) {
+    /* ----- 1. LAYOUT STRUCTURE ----- */
+    :root {
+        --sidebar-width: 0;
+        --toolbar-height: 3rem;
+    }
+
+    /* Hide desktop components */
+    .sidebar,
+    .data-table {
+        display: none !important;
+    }
+
+    .data-table table, 
+    .table-footer {
+        display: none !important;
+    }
+
+    .page-header {
+        display: none !important;
+    }
+
+    .notifications-btn, 
+    .language-btn, 
+    .help-btn, 
+    .settings-btn {
+        display: none !important;
+    }
+
+    /* Show mobile components */
+    .menu-btn {
+        display: block;
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .mobile-patient-cards {
+        display: flex !important;
+        flex-direction: column;
+        padding: 0.1rem;
+        overflow-y: auto;
+        height: calc(100vh - 7rem);
+        margin-top: 0;
+        align-items: stretch;
+        justify-content: flex-start;
+    }
+
+    .mobile-nav-bottom {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3.5rem;
+        display: flex !important;
+        justify-content: space-around;
+        align-items: center;
+        border-top: 1px solid var(--border-color);
+        z-index: 100;
+    }
+
+    /* Layout adjustments */
+    .app-layout {
+        flex-direction: column;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+        width: 100%;
+        height: calc(100vh - 3.5rem);
+    }
+
+    .page-content {
+        padding-bottom: 3.5rem;
+    }
+    
+    /* ----- 2. HEADER/TOOLBAR ----- */
+    .top-toolbar {
+        padding: 0.5rem;
+        height: var(--toolbar-height);
+        justify-content: space-between;
+    }
+
+    .search-container {
+        flex: 1;
+        max-width: none;
+        margin: 0 0.5rem;
+    }
+
+    /* ----- 3. PAGE HEADER ----- */
+    .page-subheader {
+        padding: 0.5rem;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        justify-content: center;
+    }
+
+    .view-list {
+        width: auto;
+    }
+
+    .view-list-toggle {
+        width: 100%;
+        text-align: center;
+        padding: 0.25rem;
+        font-size: var(--font-medium);
+        font-weight: bold;
+    }
+
+    /* ----- 4. PATIENT LIST ----- */
+    .patient-card {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem;
+        background-color: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        margin-bottom: 0.75rem;
+    }
+
+    .patient-info {
+        flex: 1;
+        margin-left: 0.75rem;
+    }
+
+    .patient-name {
+        font-size: var(--font-medium);
+        margin-bottom: 0.25rem;
+        font-weight: 500;
+        color: var(--text-color);
+    }
+
+    .patient-id, 
+    .patient-insurance {
+        font-size: var(--font-small);
+        color: var(--text-light);
+        line-height: 1.4;
+    }
+
+    .gender-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .gender-icon.female {
+        background-color: var(--female-tint);
+    }
+
+    .gender-icon.male {
+        background-color: var(--blue);
+    }
+
+    .gender-symbol {
+        color: white;
+        font-size: 1.25rem;
+        line-height: 1;
+    }
+
+    .detail-link {
+        color: var(--primary-color);
+        margin-left: 0.5rem;
+    }
+
+    .detail-link svg {
+        stroke: var(--primary-color);
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+    
+    /* ----- 5. BOTTOM NAVIGATION ----- */
+    .mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem;
+        font-size: var(--font-very-small);
+        color: var(--text-color);
+        text-decoration: none;
+    }
+
+    .mobile-nav-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-bottom: 0.25rem;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .mobile-nav-item:hover {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+
+    /* Toolbar buttons */
+    .toolbar-btn:not(.add-btn, .user-btn) {
+        display: none !important;
+    }
+}
+
+/* Add these to styles.css to hide mobile components in desktop view */
+@media (min-width: 769px) {
+    .mobile-patient-cards,
+    .mobile-nav-bottom,
+    .menu-btn {
+        display: none !important;
+    }
+}
