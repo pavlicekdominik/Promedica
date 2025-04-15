@@ -41,6 +41,26 @@ const PatientsListModule = {
             });
         }
         
+        // New Button - Open New Patient Modal
+        const newButton = document.querySelector('.new-button');
+        if (newButton) {
+            ComponentLoader.registerEventListener(
+                this.containerId,
+                newButton,
+                'click',
+                function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('New Patient button clicked');
+                    
+                    // Open the new patient modal
+                    window.dispatchEvent(new CustomEvent('app:openModal', {
+                        detail: { modalId: 'new-patient-modal' }
+                    }));
+                }
+            );
+        }
+        
         // Pagination buttons
         const paginationButtons = document.querySelectorAll('.pagination-btn');
         if (paginationButtons) {
