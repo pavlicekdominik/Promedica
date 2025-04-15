@@ -1101,13 +1101,13 @@ th {
 }
 
 .time-column {
-    width: 60px;
+    width: 5rem;
     border-right: 1px solid var(--border-color);
     background-color: var(--bg-lighter);
 }
 
 .time-slot {
-    height: 60px;
+    height: 6rem;
     display: flex;
     align-items: flex-start;
     justify-content: center;
