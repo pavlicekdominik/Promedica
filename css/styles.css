@@ -460,6 +460,10 @@ tr:first-child {
     background-image: url("/icons/report-icon.svg");
 }
 
+.medications-icon {
+    background-image: url("/icons/medications-icon.svg");
+}
+
 .guide-icon {
     background-image: url("/icons/guide-icon.svg");
 }
