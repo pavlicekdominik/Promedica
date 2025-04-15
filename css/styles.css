@@ -724,6 +724,7 @@ tr:first-child {
     overflow-y: auto;
     overflow-x: hidden;
     height: 100vh;
+    margin: -0.5rem;
 }
 
 /* Data Table */
@@ -911,7 +912,6 @@ th {
 .patient-details-columns {
     display: flex;
     flex-wrap: wrap;
-    margin: -0.5rem;
 }
 
 .patient-column {
