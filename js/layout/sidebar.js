@@ -34,6 +34,13 @@ const SidebarModule = {
                                 detail: { page: targetPage }
                             }));
                         }
+
+                        const mobileMenu = document.querySelector('.mobile-menu-open');
+
+                        if (mobileMenu) {
+                            mobileMenu.classList.remove('mobile-menu-open');
+                        }
+
                     }
                 );
             });

@@ -81,6 +81,45 @@ const ToolbarModule = {
                 }
             );
         }
+
+        const menuBtn = document.querySelector('.menu-btn');
+        if (menuBtn) {
+            ComponentLoader.registerEventListener(
+                this.containerId,
+                menuBtn,
+                'click',
+                (e) => {
+                    e.stopPropagation(); // Prevent document click from immediately closing
+                    document.body.classList.toggle('mobile-menu-open');
+                    console.log('Mobile menu toggled');
+                }
+            );
+            
+            // Add document click handler to close menu
+            document.addEventListener('click', (e) => {
+                // Close menu if clicking outside the sidebar
+                if (document.body.classList.contains('mobile-menu-open') && 
+                    !e.target.closest('.sidebar') && 
+                    !e.target.closest('.menu-btn')) {
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+            
+            // Prevent sidebar clicks from closing menu
+            /*
+            const sidebar = document.querySelector('.sidebar');
+            if (sidebar) {
+                ComponentLoader.registerEventListener(
+                    'sidebar-container',
+                    sidebar,
+                    'click',
+                    (e) => {
+                        e.stopPropagation();
+                    }
+                );
+            }
+            */
+        }
     },
     
     cleanup() {
