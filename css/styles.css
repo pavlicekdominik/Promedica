@@ -1054,11 +1054,23 @@ th {
 .timeline-icon {
     position: absolute;
     top: 0.5rem;
-    left: 1.2rem;
-    width: 20px;
-    height: 20px;
+    left: 1.05rem;
+    width: 1.5rem;
+    height: 1.5rem;
     border-radius: 50%;
     background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.timeline-icon-latest {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: var(--bg-color);
     display: flex;
     align-items: center;
     justify-content: center;
