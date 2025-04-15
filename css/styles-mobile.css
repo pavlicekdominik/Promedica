@@ -30,7 +30,9 @@
 
     /* Show mobile components */
     .menu-btn {
-        display: block;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
         width: 2rem;
         height: 2rem;
     }
@@ -38,12 +40,10 @@
     .mobile-patient-cards {
         display: flex !important;
         flex-direction: column;
-        padding: 0.1rem;
         overflow-y: auto;
-        height: calc(100vh - 7rem);
+        height: calc(100vh - 8.5rem);
         margin-top: 0;
-        align-items: stretch;
-        justify-content: flex-start;
+        background-color: #f8f9fa;
     }
 
     .mobile-nav-bottom {
@@ -52,11 +52,13 @@
         left: 0;
         width: 100%;
         height: 3.5rem;
+        background-color: white;
         display: flex !important;
         justify-content: space-around;
         align-items: center;
         border-top: 1px solid var(--border-color);
         z-index: 100;
+        box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
     }
 
     /* Layout adjustments */
@@ -72,27 +74,56 @@
 
     .page-content {
         padding-bottom: 3.5rem;
+        background-color: #f8f9fa;
     }
     
     /* ----- 2. HEADER/TOOLBAR ----- */
     .top-toolbar {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
         padding: 0.5rem;
-        height: var(--toolbar-height);
-        justify-content: space-between;
+        gap: 0.5rem;
+        align-items: center;
+        height: auto;
+        background-color: white;
     }
 
     .search-container {
         flex: 1;
         max-width: none;
-        margin: 0 0.5rem;
+        margin: 0;
+        background-color: var(--bg-light);
+        border-radius: 1.25rem;
+        padding: 0 0.5rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .search-input {
+        background: transparent;
+        border: none;
+        height: 2.25rem;
+    }
+
+    .toolbar-actions {
+        display: flex;
+        align-items: center;
+    }
+    
+    .toolbar-btn {
+        margin-left: 0.25rem;
+    }
+
+    .add-btn {
+        display: flex !important;
+        background-color: transparent;
     }
 
     /* ----- 3. PAGE HEADER ----- */
     .page-subheader {
-        padding: 0.5rem;
-        border-bottom: 1px solid var(--border-color);
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
+        align-items: self-start;
     }
 
     .view-list {
@@ -101,10 +132,23 @@
 
     .view-list-toggle {
         width: 100%;
-        text-align: center;
-        padding: 0.25rem;
+        text-align: left;
         font-size: var(--font-medium);
         font-weight: bold;
+        display: flex;
+        align-items: center;
+    }
+
+    .dropdown-toggle {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+        border-radius: var(--border-radius);
+        background-color: transparent;
+    }
+
+    .dropdown-toggle::after {
+        display: none;
     }
 
     /* ----- 4. PATIENT LIST ----- */
@@ -124,10 +168,14 @@
     }
 
     .patient-name {
-        font-size: var(--font-medium);
+        font-size: var(--font-large);
         margin-bottom: 0.25rem;
-        font-weight: 500;
+        font-weight: bold;
         color: var(--text-color);
+    }
+
+    .patient-basic-info {
+        padding-left: 1rem;
     }
 
     .patient-id, 
@@ -137,32 +185,18 @@
         line-height: 1.4;
     }
 
-    .gender-icon {
+    .patient-avatar {
         width: 2.5rem;
         height: 2.5rem;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .gender-icon.female {
-        background-color: var(--female-tint);
-    }
-
-    .gender-icon.male {
-        background-color: var(--blue);
-    }
-
-    .gender-symbol {
-        color: white;
-        font-size: 1.25rem;
-        line-height: 1;
+        margin: 0;
     }
 
     .detail-link {
         color: var(--primary-color);
         margin-left: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .detail-link svg {
