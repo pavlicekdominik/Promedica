@@ -380,6 +380,14 @@ tr:first-child {
     background-image: url("/icons/cancel-icon.svg");
 }
 
+.documents-icon {
+    background-image: url("/icons/document-icon.svg");
+}
+
+.user-icon {
+    background-image: url("/icons/user-icon.svg");
+}
+
 .mc-icon {
     background-image: url("/icons/mc.png");
     width: 10rem;
@@ -449,7 +457,7 @@ tr:first-child {
 }
 
 .nav-group-header {
-    padding: 0 1.5rem;
+    padding: 0 1.5rem 0 1rem;
     margin-bottom: 0.5rem;
     font-weight: 500;
     color: var(--text-light);

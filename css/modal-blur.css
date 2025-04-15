@@ -2,6 +2,8 @@
 .blur-background #sidebar-container {
     filter: blur(4px);
     transition: filter 0.3s ease;
+    
+    pointer-events: none;
 }
 
 .modal-open {
@@ -25,6 +27,7 @@
 
 .modal-overlay.visible {
     opacity: 1;
+    pointer-events: none;
 }
 
 .modal {

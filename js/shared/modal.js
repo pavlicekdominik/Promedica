@@ -72,11 +72,47 @@ const ModalModule = {
                     function() {
                         const label = this.querySelector('.settings-label, .help-label, .new-menu-label');
                         if (label) {
-                            ModalModule.closeModal();
+                            // For new patient option, open the new patient modal
+                            if (this.id === 'new-patient-option') {
+                                ModalModule.closeModal();
+                                setTimeout(() => {
+                                    ModalModule.openModal('new-patient-modal');
+                                }, 300);
+                            } else {
+                                ModalModule.closeModal();
+                            }
                         }
                     }
                 );
             });
+        }
+        
+        // Add event listeners for the new patient modal buttons
+        const cancelNewPatientBtn = document.getElementById('cancel-new-patient');
+        if (cancelNewPatientBtn) {
+            ComponentLoader.registerEventListener(
+                this.containerId,
+                cancelNewPatientBtn,
+                'click',
+                () => {
+                    this.closeModal();
+                }
+            );
+        }
+        
+        const continueNewPatientBtn = document.getElementById('continue-new-patient');
+        if (continueNewPatientBtn) {
+            ComponentLoader.registerEventListener(
+                this.containerId,
+                continueNewPatientBtn,
+                'click',
+                () => {
+                    // Handle form submission here
+                    console.log('New patient form submitted');
+                    this.closeModal();
+                    // Redirect to patient detail or other page as needed
+                }
+            );
         }
         
         window.addEventListener('keydown', (e) => {
