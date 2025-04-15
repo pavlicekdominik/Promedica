@@ -336,7 +336,10 @@ tr:first-child {
 
 .grid-button-icon,
 .ribbon-button-icon,
-.new-menu-icon {
+.new-menu-icon,
+.help-icon,
+.settings-icon,
+.doctor-info-icon {
     width: var(--ribbon-icon);
     height: var(--ribbon-icon);
     display: inline-block;
@@ -455,6 +458,42 @@ tr:first-child {
 
 .reports-icon {
     background-image: url("/icons/report-icon.svg");
+}
+
+.guide-icon {
+    background-image: url("/icons/guide-icon.svg");
+}
+
+.bug-icon {
+    background-image: url("/icons/bug-icon.svg");
+}
+
+.suggestion-icon {
+    background-image: url("/icons/suggestion-icon.svg");
+}
+
+.display-icon {
+    background-image: url("/icons/display-icon.svg");
+}
+
+.theme-icon {
+    background-image: url("/icons/theme-icon.svg");
+}
+
+.language-icon {
+    background-image: url("/icons/language-icon.svg");
+}
+
+.notifications-icon {
+    background-image: url("/icons/notification-icon.svg");
+}
+
+.privacy-icon {
+    background-image: url("/icons/policy-icon.svg");
+}
+
+.doctor-icon {
+    background-image: url("/icons/user-icon.svg");
 }
 
 .nav-item.active .nav-icon {
