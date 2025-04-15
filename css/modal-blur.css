@@ -1,8 +1,6 @@
 .blur-background .main-content,
 .blur-background #sidebar-container {
     filter: blur(4px);
-    transition: filter 0.3s ease;
-    
     pointer-events: none;
 }
 
@@ -10,7 +8,7 @@
     overflow: hidden;
 }
 
-.modal-overlay {
+#modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -21,13 +19,13 @@
     display: none;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
-    transition: opacity var(--transition) ease;
     opacity: 0;
 }
 
-.modal-overlay.visible {
+#modal-overlay.visible {
     opacity: 1;
     pointer-events: none;
+    background-color: rgba(0, 0, 0, 0.65);
 }
 
 .modal {
@@ -45,16 +43,14 @@
     overflow-y: auto;
     display: none;
     opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .modal.visible {
-    transform: translate(-50%, -50%) scale(1);
     opacity: 1;
 }
 
 @supports not (backdrop-filter: blur(4px)) {
-    .modal-overlay {
-        background-color: rgba(0, 0, 0, 0.75);
+    #modal-overlay {
+        background-color: rgba(0, 0, 0, 0.65);
     }
 }
