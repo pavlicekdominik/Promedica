@@ -341,7 +341,8 @@ tr:first-child {
 .new-menu-icon,
 .help-icon,
 .settings-icon,
-.doctor-info-icon {
+.doctor-info-icon,
+.search-button-icon {
     width: var(--ribbon-icon);
     height: var(--ribbon-icon);
     display: inline-block;
@@ -517,6 +518,11 @@ tr:first-child {
 
 .menu-icon {
     background-image: url("/icons/menu-icon.svg");
+}
+
+.close-icon {
+    background-image: url("/icons/close-icon.svg");
+    opacity: 0.5;
 }
 
 .nav-item.active .nav-icon {
