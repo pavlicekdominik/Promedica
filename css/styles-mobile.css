@@ -12,6 +12,14 @@
         display: none !important;
     }
 
+    .nav-items {
+        padding: 0 0.2rem;
+    }
+
+    .nav-group {
+        margin: 0.5rem 0;
+    }
+
     .data-table table, 
     .table-footer {
         display: none !important;
