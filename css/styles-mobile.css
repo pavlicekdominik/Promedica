@@ -120,6 +120,10 @@
         padding: 0.2rem !important;
     }
 
+    .calendar-grid {
+        height: 100vh;
+    }
+
     .top-toolbar {
         display: grid;
         grid-template-columns: auto 1fr auto;
