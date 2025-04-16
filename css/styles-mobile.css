@@ -116,6 +116,10 @@
         display: block;
     }
 
+    .calendar-page {
+        padding: 0.1rem !important;
+    }
+
     .top-toolbar {
         display: grid;
         grid-template-columns: auto 1fr auto;

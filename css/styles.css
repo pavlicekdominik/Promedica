@@ -1134,12 +1134,14 @@ th {
 /* Calendar Page */
 .calendar-grid {
     display: flex;
+    flex-wrap: wrap;
     height: calc(100vh - 120px);
-    background-color: var(--bg-color);
+    background-color: transparent;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     overflow: hidden;
     position: relative;
+    overflow-y: auto;
 }
 
 .time-column {
@@ -1164,6 +1166,7 @@ th {
     flex-grow: 1;
     position: relative;
     overflow-y: auto;
+    background-color: var(--bg-color);
 }
 
 .appointment {
