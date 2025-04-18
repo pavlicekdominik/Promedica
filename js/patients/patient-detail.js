@@ -21,6 +21,36 @@ const PatientDetailModule = {
     },
     
     bindEvents() {
+        const deactivateButton = document.querySelector('.deactivate-button');
+        if (deactivateButton) {
+            ComponentLoader.registerEventListener(
+                this.containerId,
+                deactivateButton,
+                'click',
+                function() {
+                    window.dispatchEvent(new CustomEvent('app:openModal', {
+                        detail: { modalId: 'deactivation-confirm-modal' }
+                    }));
+                }
+            );
+        }
+        
+        // Mobile Deactivate button (bottom navigation)
+        const mobileDeactivateButton = document.querySelector('.mobile-nav-item:nth-child(2)');
+        if (mobileDeactivateButton) {
+            ComponentLoader.registerEventListener(
+                this.containerId,
+                mobileDeactivateButton,
+                'click',
+                function(e) {
+                    e.preventDefault();
+                    window.dispatchEvent(new CustomEvent('app:openModal', {
+                        detail: { modalId: 'deactivation-confirm-modal' }
+                    }));
+                }
+            );
+        }
+        
         // Use querySelectorAll to get all back buttons (desktop and mobile)
         const backBtns = document.querySelectorAll('.back-btn');
         if (backBtns.length) {

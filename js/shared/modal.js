@@ -114,6 +114,38 @@ const ModalModule = {
                 }
             );
         }
+
+        const cancelDeactivationBtn = document.getElementById('cancel-deactivation');
+        if (cancelDeactivationBtn) {
+            ComponentLoader.registerEventListener(
+                this.containerId,
+                cancelDeactivationBtn,
+                'click',
+                () => {
+                    this.closeModal();
+                }
+            );
+        }
+
+        const confirmDeactivationBtn = document.getElementById('confirm-deactivation');
+        if (confirmDeactivationBtn) {
+            ComponentLoader.registerEventListener(
+                this.containerId,
+                confirmDeactivationBtn,
+                'click',
+                () => {
+                    this.closeModal();
+                    setTimeout(() => {
+                        this.openModal('deactivation-loading-modal');
+                        
+                        // Close loading modal after 2 seconds
+                        setTimeout(() => {
+                            this.closeModal();
+                        }, 2000);
+                    }, 300); // Wait for confirmation modal to close
+                }
+            );
+        }
         
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {

@@ -77,6 +77,20 @@ const PatientsListModule = {
                 this.handleNewPatient
             );
         }
+
+        const deactivateButton = document.querySelector('.deactivate-button');
+        if (deactivateButton) {
+            ComponentLoader.registerEventListener(
+                this.containerId,
+                deactivateButton,
+                'click',
+                function() {
+                    window.dispatchEvent(new CustomEvent('app:openModal', {
+                        detail: { modalId: 'deactivation-confirm-modal' }
+                    }));
+                }
+            );
+        }
         
         // Mobile Deactivate button (bottom navigation)
         const mobileDeactivateButton = document.querySelector('.mobile-nav-item:nth-child(2)');
@@ -87,8 +101,9 @@ const PatientsListModule = {
                 'click',
                 function(e) {
                     e.preventDefault();
-                    console.log('Mobile Deactivate button clicked');
-                    // Handle deactivation logic
+                    window.dispatchEvent(new CustomEvent('app:openModal', {
+                        detail: { modalId: 'deactivation-confirm-modal' }
+                    }));
                 }
             );
         }
